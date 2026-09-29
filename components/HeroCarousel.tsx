@@ -4,10 +4,16 @@ import Image from "next/image";
 
 type Slide = { image: string; alt: string; heading: string; subhead: string };
 
-// Two audiences, two messages. The image, heading, and subtext change
+// Three audiences, three messages. The image, heading, and subtext change
 // together so each slide reads as one coherent pitch, not a photo swap under
 // static text.
 const SLIDES: Slide[] = [
+  {
+    image: "/images/corporate-professional-home-collection.webp",
+    alt: "A phlebotomist in gloves and a mask visits a corporate professional at home to draw a blood sample while he works on his laptop, using a professional collection kit with labelled sample tubes and a sharps container.",
+    heading: "Know Where Your Body Needs Attention",
+    subhead: "Comprehensive full body checkups for professionals who'd rather catch a problem early than manage one later.",
+  },
   {
     image: "/images/hero-home-collection.png",
     alt: "A phlebotomist in gloves and a mask visits a pregnant woman at home to collect a blood sample, using a professional collection kit with labelled sample tubes and a sharps container.",

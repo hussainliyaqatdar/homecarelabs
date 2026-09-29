@@ -9,7 +9,12 @@ const RULES = [
   [/\bafb\b|tb culture|mycobact/i, { label: "2-4 weeks", weight: 672 }],
   [/biopsy|histopath|cytology|\bfnac\b/i, { label: "3-5 days", weight: 120 }],
   [/double marker|quadruple marker|triple marker/i, { label: "2-3 days", weight: 72 }],
-  [/culture|sensitivity|susceptibility/i, { label: "2-3 days", weight: 72 }],
+  // "sensitivity"/"susceptibility" alone used to be in this pattern too, but
+  // every real culture test already says "culture" as well, and the bare
+  // words falsely matched unrelated tests like "High Sensitivity C-Reactive
+  // Protein" and "Hypersensitivity Pneumonitis Panel", giving same-day serum
+  // tests a fabricated multi-day culture turnaround.
+  [/culture/i, { label: "2-3 days", weight: 72 }],
   [/allerg/i, { label: "2-3 days", weight: 72 }],
   [/stool|faecal|fecal/i, { label: "12-24 hours", weight: 24 }],
   [/torch|widal|vdrl|hiv|hbsag|hcv|hepatitis|dengue|malaria|typhoid/i, { label: "12-24 hours", weight: 24 }],

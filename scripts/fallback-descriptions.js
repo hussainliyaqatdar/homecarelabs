@@ -5,7 +5,12 @@
 // these are auto-generated rather than individually reviewed.
 const RULES = [
   [/vitamin/i, (n) => `Checks your ${cleanName(n)} levels. Useful if your doctor suspects a deficiency, or wants a fuller picture as part of a nutrition or metabolic checkup.`],
-  [/culture|sensitivity|susceptibility/i, (n) => `Grows any bacteria or organisms present in your sample to confirm an infection - and shows exactly which antibiotics will actually work against it.`],
+  // "sensitivity"/"susceptibility" alone used to be in this pattern too, but
+  // every real culture test already says "culture" as well, and the bare
+  // words falsely matched unrelated tests like "High Sensitivity C-Reactive
+  // Protein", giving a same-day inflammation marker a fabricated "grows
+  // bacteria" description that belongs to microbiology culture tests.
+  [/culture/i, (n) => `Grows any bacteria or organisms present in your sample to confirm an infection - and shows exactly which antibiotics will actually work against it.`],
   [/biopsy|cytology|fnac|histopath/i, (n) => `A pathologist examines a small tissue or cell sample under the microscope to confirm or rule out a diagnosis. Your doctor will guide you on collection specifics.`],
   [/\bpcr\b|molecular|dna|rna/i, (n) => `A fast, highly accurate molecular (PCR) test that detects an organism's genetic material directly, for quick and reliable confirmation of infection.`],
   [/antibod(y|ies)|\bigg\b|\bigm\b|\bige\b|\biga\b/i, (n) => `Checks for antibodies related to ${cleanName(n)}, showing your doctor whether you've been exposed to it recently, in the past, or not at all.`],
@@ -13,6 +18,7 @@ const RULES = [
   [/allerg/i, (n) => `Checks how sensitised your immune system is to specific triggers, helping explain symptoms like skin reactions, sneezing, or breathing difficulty.`],
   [/panel|profile|screen\b/i, (n) => `A set of related tests run together so your doctor gets the fuller picture needed for diagnosis or monitoring, rather than just one isolated number.`],
   [/tumor|tumour|marker|\bca \d|\bafp\b|\bcea\b|\bpsa\b/i, (n) => `A tumour marker that helps track a known condition or how well treatment is working. Always read alongside imaging and your doctor's clinical judgement, not on its own.`],
+  [/c-reactive protein|\bcrp\b/i, (n) => `Checks C-reactive protein (CRP), a marker of inflammation in your body - useful for assessing heart disease risk or tracking an ongoing inflammatory condition.`],
   [/hormone|testosterone|estrogen|oestrogen|progesterone|cortisol|acth|prolactin|\bfsh\b|\blh\b|thyroid|\btsh\b|\bt3\b|\bt4\b/i, (n) => `Checks your ${cleanName(n)} level, part of the hormone picture your doctor uses to understand energy, metabolism, mood, or reproductive health.`],
   [/urine|urinary/i, (n) => `A urine-based test that helps your doctor check kidney function, catch an infection, or screen for a specific substance.`],
   [/stool|faecal|fecal/i, (n) => `A stool-based test that helps investigate ongoing digestive symptoms, infection, or unexplained bleeding in the gut.`],

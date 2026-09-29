@@ -20,7 +20,7 @@ export const allPackages = packagesData as PackageItem[];
 
 // Categories a business wants surfaced first (e.g. a current marketing push),
 // in priority order; everything else follows alphabetically.
-const PRIORITY_CATEGORIES = ["Women's Health"];
+const PRIORITY_CATEGORIES = ["Full Body Checkups", "Women's Health"];
 function sortWithPriority(categories: string[]): string[] {
   const priority = PRIORITY_CATEGORIES.filter((c) => categories.includes(c));
   const rest = categories.filter((c) => !PRIORITY_CATEGORIES.includes(c)).sort();

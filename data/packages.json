@@ -231,6 +231,666 @@
     ]
   },
   {
+    "id": "PKG-FBCP",
+    "slug": "full-body-checkup-pro",
+    "name": "Full Body Checkup - Pro",
+    "code": "PKG-FBCP",
+    "category": "Full Body Checkups",
+    "price": 2599,
+    "mrp": 8150,
+    "tagline": "92-Parameter Comprehensive Screen",
+    "description": "Our most thorough annual screen yet - everything in Full Body Checkup Advanced, plus iron and an inflammation marker (CRP), giving your doctor a fuller picture of your heart, bone, and blood health in one visit.",
+    "constituents": [
+      {
+        "name": "CBC-5, EDTA Whole Blood",
+        "slug": "cbc-5-edta-whole-blood",
+        "price": 400
+      },
+      {
+        "name": "Fasting Blood Sugar (FBS)",
+        "slug": "glucose-fasting-fluoride-plasma",
+        "price": 80
+      },
+      {
+        "name": "Calcium, Serum",
+        "slug": "calcium-serum",
+        "price": 255
+      },
+      {
+        "name": "Urinalysis",
+        "slug": "urinalysis",
+        "price": 200
+      },
+      {
+        "name": "Thyroid Panel (T3, T4, TSH)",
+        "slug": "thyroid-panel-tsh-serum",
+        "price": 580
+      },
+      {
+        "name": "HbA1c (Glycosylated Haemoglobin)",
+        "slug": "glycosylated-hemoglobin-hba1c",
+        "price": 600
+      },
+      {
+        "name": "Lipid Profile",
+        "slug": "lipid-profile-serum",
+        "price": 650
+      },
+      {
+        "name": "Kidney Function Test (KFT)",
+        "slug": "kidney-function-test",
+        "price": 1000
+      },
+      {
+        "name": "Liver Function Profile (LFT)",
+        "slug": "liver-function-profile-serum",
+        "price": 900
+      },
+      {
+        "name": "Vitamin D Total (25-Hydroxyvitamin D), Serum",
+        "slug": "vitamin-d-total-25-hydroxyvitamin-d-serum",
+        "price": 1750
+      },
+      {
+        "name": "Vitamin B12 (Cyanocobalamin), Serum",
+        "slug": "vitamin-b12-cyanocobalamine-serum",
+        "price": 1350
+      },
+      {
+        "name": "Iron, Serum",
+        "slug": "iron-serum",
+        "price": 605
+      },
+      {
+        "name": "CRP - Quantitative, Serum",
+        "slug": "crp-semi-quantitative-serum",
+        "price": 415
+      }
+    ],
+    "needsContent": false,
+    "eta": "12-24 hours",
+    "faqs": [
+      {
+        "q": "Can I book the Full Body Checkup - Pro package near me in Bangalore?",
+        "a": "Yes - the Full Body Checkup - Pro package is available for home sample collection across Bangalore, including JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road. No need to visit a lab; book online and we'll send a phlebotomist to you."
+      },
+      {
+        "q": "What is the price of the Full Body Checkup - Pro package in Bangalore?",
+        "a": "The Full Body Checkup - Pro package costs Rs. 2,599 (down from Rs. 8,150 MRP) for all 13 tests included, with home collection at no extra charge and no advance payment."
+      },
+      {
+        "q": "Is home collection available for the Full Body Checkup - Pro package?",
+        "a": "Yes. All 13 tests included in the Full Body Checkup - Pro package are collected in a single home visit by a trained phlebotomist. Reports are typically ready in 12-24 hours."
+      },
+      {
+        "q": "What does the Full Body Checkup - Pro package include?",
+        "a": "Our most thorough annual screen yet - everything in Full Body Checkup Advanced, plus iron and an inflammation marker (CRP), giving your doctor a fuller picture of your heart, bone, and blood health in one visit."
+      },
+      {
+        "q": "Is the Full Body Checkup - Pro package tested at NABL-accredited labs?",
+        "a": "Yes. Every test in the Full Body Checkup - Pro package is processed at NABL-accredited labs run by Agilus Diagnostics (formerly SRL Diagnostics), our official diagnostics partner."
+      }
+    ]
+  },
+  {
+    "id": "PKG-FBCPMM",
+    "slug": "full-body-checkup-pro-max-men",
+    "name": "Full Body Checkup - Pro Max (Men)",
+    "code": "PKG-FBCPMM",
+    "category": "Full Body Checkups",
+    "price": 3099,
+    "mrp": 11040,
+    "tagline": "97-Parameter Screen with Prostate Marker",
+    "description": "A deeper annual workup for men who want more than the basics. Adds bone and muscle minerals (phosphorus, magnesium), fuller iron studies, and a PSA prostate screen to our Pro checkup - a smart step up once you're past 40.",
+    "constituents": [
+      {
+        "name": "CBC-5, EDTA Whole Blood",
+        "slug": "cbc-5-edta-whole-blood",
+        "price": 400
+      },
+      {
+        "name": "Fasting Blood Sugar (FBS)",
+        "slug": "glucose-fasting-fluoride-plasma",
+        "price": 80
+      },
+      {
+        "name": "Calcium, Serum",
+        "slug": "calcium-serum",
+        "price": 255
+      },
+      {
+        "name": "Urinalysis",
+        "slug": "urinalysis",
+        "price": 200
+      },
+      {
+        "name": "Free Triiodothyronine (FT3), Serum",
+        "slug": "free-triiodothyronine-ft3-serum",
+        "price": 500
+      },
+      {
+        "name": "Free Thyroxine (FT4), Serum",
+        "slug": "free-thyroxine-ft4-serum",
+        "price": 500
+      },
+      {
+        "name": "TSH 3rd Gen Ultrasensitive, Serum",
+        "slug": "tsh-3rd-gen-ultrasensitive-serum",
+        "price": 380
+      },
+      {
+        "name": "HbA1c (Glycosylated Haemoglobin)",
+        "slug": "glycosylated-hemoglobin-hba1c",
+        "price": 600
+      },
+      {
+        "name": "Lipid Profile",
+        "slug": "lipid-profile-serum",
+        "price": 650
+      },
+      {
+        "name": "Kidney Function Test (KFT)",
+        "slug": "kidney-function-test",
+        "price": 1000
+      },
+      {
+        "name": "Liver Function Profile (LFT)",
+        "slug": "liver-function-profile-serum",
+        "price": 900
+      },
+      {
+        "name": "Vitamin D Total (25-Hydroxyvitamin D), Serum",
+        "slug": "vitamin-d-total-25-hydroxyvitamin-d-serum",
+        "price": 1750
+      },
+      {
+        "name": "Vitamin B12 (Cyanocobalamin), Serum",
+        "slug": "vitamin-b12-cyanocobalamine-serum",
+        "price": 1350
+      },
+      {
+        "name": "Iron, Serum",
+        "slug": "iron-serum",
+        "price": 605
+      },
+      {
+        "name": "CRP - Quantitative, Serum",
+        "slug": "crp-semi-quantitative-serum",
+        "price": 415
+      },
+      {
+        "name": "Phosphorus, Serum",
+        "slug": "phosphorus-serum",
+        "price": 255
+      },
+      {
+        "name": "Total Iron Binding Capacity, Serum",
+        "slug": "total-iron-binding-capacity-serum",
+        "price": 530
+      },
+      {
+        "name": "Magnesium, Serum",
+        "slug": "magnesium-serum",
+        "price": 440
+      },
+      {
+        "name": "Prostate Specific Antigen (PSA), Serum",
+        "slug": "prostate-specific-antigen-psa-serum",
+        "price": 1050
+      }
+    ],
+    "needsContent": false,
+    "eta": "12-24 hours",
+    "faqs": [
+      {
+        "q": "Can I book the Full Body Checkup - Pro Max (Men) package near me in Bangalore?",
+        "a": "Yes - the Full Body Checkup - Pro Max (Men) package is available for home sample collection across Bangalore, including JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road. No need to visit a lab; book online and we'll send a phlebotomist to you."
+      },
+      {
+        "q": "What is the price of the Full Body Checkup - Pro Max (Men) package in Bangalore?",
+        "a": "The Full Body Checkup - Pro Max (Men) package costs Rs. 3,099 (down from Rs. 11,040 MRP) for all 19 tests included, with home collection at no extra charge and no advance payment."
+      },
+      {
+        "q": "Is home collection available for the Full Body Checkup - Pro Max (Men) package?",
+        "a": "Yes. All 19 tests included in the Full Body Checkup - Pro Max (Men) package are collected in a single home visit by a trained phlebotomist. Reports are typically ready in 12-24 hours."
+      },
+      {
+        "q": "What does the Full Body Checkup - Pro Max (Men) package include?",
+        "a": "A deeper annual workup for men who want more than the basics. Adds bone and muscle minerals (phosphorus, magnesium), fuller iron studies, and a PSA prostate screen to our Pro checkup - a smart step up once you're past 40."
+      },
+      {
+        "q": "Is the Full Body Checkup - Pro Max (Men) package tested at NABL-accredited labs?",
+        "a": "Yes. Every test in the Full Body Checkup - Pro Max (Men) package is processed at NABL-accredited labs run by Agilus Diagnostics (formerly SRL Diagnostics), our official diagnostics partner."
+      }
+    ]
+  },
+  {
+    "id": "PKG-FBCPMW",
+    "slug": "full-body-checkup-pro-max-women",
+    "name": "Full Body Checkup - Pro Max (Women)",
+    "code": "PKG-FBCPMW",
+    "category": "Full Body Checkups",
+    "price": 3099,
+    "mrp": 11040,
+    "tagline": "97-Parameter Screen with Ovarian Marker",
+    "description": "A deeper annual workup for women who want more than the basics. Adds bone and muscle minerals (phosphorus, magnesium), fuller iron studies, and a CA 125 ovarian screen to our Pro checkup - a smart step up once you're past 40.",
+    "constituents": [
+      {
+        "name": "CBC-5, EDTA Whole Blood",
+        "slug": "cbc-5-edta-whole-blood",
+        "price": 400
+      },
+      {
+        "name": "Fasting Blood Sugar (FBS)",
+        "slug": "glucose-fasting-fluoride-plasma",
+        "price": 80
+      },
+      {
+        "name": "Calcium, Serum",
+        "slug": "calcium-serum",
+        "price": 255
+      },
+      {
+        "name": "Urinalysis",
+        "slug": "urinalysis",
+        "price": 200
+      },
+      {
+        "name": "Free Triiodothyronine (FT3), Serum",
+        "slug": "free-triiodothyronine-ft3-serum",
+        "price": 500
+      },
+      {
+        "name": "Free Thyroxine (FT4), Serum",
+        "slug": "free-thyroxine-ft4-serum",
+        "price": 500
+      },
+      {
+        "name": "TSH 3rd Gen Ultrasensitive, Serum",
+        "slug": "tsh-3rd-gen-ultrasensitive-serum",
+        "price": 380
+      },
+      {
+        "name": "HbA1c (Glycosylated Haemoglobin)",
+        "slug": "glycosylated-hemoglobin-hba1c",
+        "price": 600
+      },
+      {
+        "name": "Lipid Profile",
+        "slug": "lipid-profile-serum",
+        "price": 650
+      },
+      {
+        "name": "Kidney Function Test (KFT)",
+        "slug": "kidney-function-test",
+        "price": 1000
+      },
+      {
+        "name": "Liver Function Profile (LFT)",
+        "slug": "liver-function-profile-serum",
+        "price": 900
+      },
+      {
+        "name": "Vitamin D Total (25-Hydroxyvitamin D), Serum",
+        "slug": "vitamin-d-total-25-hydroxyvitamin-d-serum",
+        "price": 1750
+      },
+      {
+        "name": "Vitamin B12 (Cyanocobalamin), Serum",
+        "slug": "vitamin-b12-cyanocobalamine-serum",
+        "price": 1350
+      },
+      {
+        "name": "Iron, Serum",
+        "slug": "iron-serum",
+        "price": 605
+      },
+      {
+        "name": "CRP - Quantitative, Serum",
+        "slug": "crp-semi-quantitative-serum",
+        "price": 415
+      },
+      {
+        "name": "Phosphorus, Serum",
+        "slug": "phosphorus-serum",
+        "price": 255
+      },
+      {
+        "name": "Total Iron Binding Capacity, Serum",
+        "slug": "total-iron-binding-capacity-serum",
+        "price": 530
+      },
+      {
+        "name": "Magnesium, Serum",
+        "slug": "magnesium-serum",
+        "price": 440
+      },
+      {
+        "name": "CA 125 (Ovarian Cancer Monitor), Serum",
+        "slug": "ca-125-ovarian-cancer-monitor-serum",
+        "price": 1550
+      }
+    ],
+    "needsContent": false,
+    "eta": "12-24 hours",
+    "faqs": [
+      {
+        "q": "Can I book the Full Body Checkup - Pro Max (Women) package near me in Bangalore?",
+        "a": "Yes - the Full Body Checkup - Pro Max (Women) package is available for home sample collection across Bangalore, including JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road. No need to visit a lab; book online and we'll send a phlebotomist to you."
+      },
+      {
+        "q": "What is the price of the Full Body Checkup - Pro Max (Women) package in Bangalore?",
+        "a": "The Full Body Checkup - Pro Max (Women) package costs Rs. 3,099 (down from Rs. 11,040 MRP) for all 19 tests included, with home collection at no extra charge and no advance payment."
+      },
+      {
+        "q": "Is home collection available for the Full Body Checkup - Pro Max (Women) package?",
+        "a": "Yes. All 19 tests included in the Full Body Checkup - Pro Max (Women) package are collected in a single home visit by a trained phlebotomist. Reports are typically ready in 12-24 hours."
+      },
+      {
+        "q": "What does the Full Body Checkup - Pro Max (Women) package include?",
+        "a": "A deeper annual workup for women who want more than the basics. Adds bone and muscle minerals (phosphorus, magnesium), fuller iron studies, and a CA 125 ovarian screen to our Pro checkup - a smart step up once you're past 40."
+      },
+      {
+        "q": "Is the Full Body Checkup - Pro Max (Women) package tested at NABL-accredited labs?",
+        "a": "Yes. Every test in the Full Body Checkup - Pro Max (Women) package is processed at NABL-accredited labs run by Agilus Diagnostics (formerly SRL Diagnostics), our official diagnostics partner."
+      }
+    ]
+  },
+  {
+    "id": "PKG-FBCUM",
+    "slug": "full-body-checkup-ultra-men",
+    "name": "Full Body Checkup - Ultra (Men)",
+    "code": "PKG-FBCUM",
+    "category": "Full Body Checkups",
+    "price": 4199,
+    "mrp": 13600,
+    "tagline": "100-Parameter Ultimate Screen with Prostate Marker",
+    "description": "Our most complete annual checkup for men. Everything in Pro Max, plus folic acid, rheumatoid factor, cortisol, and true high-sensitivity CRP - a comprehensive, doctor-grade workup for a thorough yearly review.",
+    "constituents": [
+      {
+        "name": "CBC-5, EDTA Whole Blood",
+        "slug": "cbc-5-edta-whole-blood",
+        "price": 400
+      },
+      {
+        "name": "Fasting Blood Sugar (FBS)",
+        "slug": "glucose-fasting-fluoride-plasma",
+        "price": 80
+      },
+      {
+        "name": "Calcium, Serum",
+        "slug": "calcium-serum",
+        "price": 255
+      },
+      {
+        "name": "Urinalysis",
+        "slug": "urinalysis",
+        "price": 200
+      },
+      {
+        "name": "Free Triiodothyronine (FT3), Serum",
+        "slug": "free-triiodothyronine-ft3-serum",
+        "price": 500
+      },
+      {
+        "name": "Free Thyroxine (FT4), Serum",
+        "slug": "free-thyroxine-ft4-serum",
+        "price": 500
+      },
+      {
+        "name": "TSH 3rd Gen Ultrasensitive, Serum",
+        "slug": "tsh-3rd-gen-ultrasensitive-serum",
+        "price": 380
+      },
+      {
+        "name": "HbA1c (Glycosylated Haemoglobin)",
+        "slug": "glycosylated-hemoglobin-hba1c",
+        "price": 600
+      },
+      {
+        "name": "Lipid Profile",
+        "slug": "lipid-profile-serum",
+        "price": 650
+      },
+      {
+        "name": "Kidney Function Test (KFT)",
+        "slug": "kidney-function-test",
+        "price": 1000
+      },
+      {
+        "name": "Liver Function Profile (LFT)",
+        "slug": "liver-function-profile-serum",
+        "price": 900
+      },
+      {
+        "name": "Vitamin D Total (25-Hydroxyvitamin D), Serum",
+        "slug": "vitamin-d-total-25-hydroxyvitamin-d-serum",
+        "price": 1750
+      },
+      {
+        "name": "Vitamin B12 (Cyanocobalamin), Serum",
+        "slug": "vitamin-b12-cyanocobalamine-serum",
+        "price": 1350
+      },
+      {
+        "name": "Iron, Serum",
+        "slug": "iron-serum",
+        "price": 605
+      },
+      {
+        "name": "High Sensitivity C-Reactive Protein, Serum",
+        "slug": "high-sensitivity-c-reactive-protein-serum",
+        "price": 1000
+      },
+      {
+        "name": "Phosphorus, Serum",
+        "slug": "phosphorus-serum",
+        "price": 255
+      },
+      {
+        "name": "Total Iron Binding Capacity, Serum",
+        "slug": "total-iron-binding-capacity-serum",
+        "price": 530
+      },
+      {
+        "name": "Magnesium, Serum",
+        "slug": "magnesium-serum",
+        "price": 440
+      },
+      {
+        "name": "Folic Acid, Serum",
+        "slug": "folic-acid-serum",
+        "price": 1400
+      },
+      {
+        "name": "Rheumatoid Factor, Serum",
+        "slug": "rheumatoid-factor-serum",
+        "price": 800
+      },
+      {
+        "name": "Cortisol, Serum",
+        "slug": "cortisol-serum",
+        "price": 800
+      },
+      {
+        "name": "Prostate Specific Antigen (PSA), Serum",
+        "slug": "prostate-specific-antigen-psa-serum",
+        "price": 1050
+      }
+    ],
+    "needsContent": false,
+    "eta": "12-24 hours",
+    "faqs": [
+      {
+        "q": "Can I book the Full Body Checkup - Ultra (Men) package near me in Bangalore?",
+        "a": "Yes - the Full Body Checkup - Ultra (Men) package is available for home sample collection across Bangalore, including JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road. No need to visit a lab; book online and we'll send a phlebotomist to you."
+      },
+      {
+        "q": "What is the price of the Full Body Checkup - Ultra (Men) package in Bangalore?",
+        "a": "The Full Body Checkup - Ultra (Men) package costs Rs. 4,199 (down from Rs. 13,600 MRP) for all 22 tests included, with home collection at no extra charge and no advance payment."
+      },
+      {
+        "q": "Is home collection available for the Full Body Checkup - Ultra (Men) package?",
+        "a": "Yes. All 22 tests included in the Full Body Checkup - Ultra (Men) package are collected in a single home visit by a trained phlebotomist. Reports are typically ready in 12-24 hours."
+      },
+      {
+        "q": "What does the Full Body Checkup - Ultra (Men) package include?",
+        "a": "Our most complete annual checkup for men. Everything in Pro Max, plus folic acid, rheumatoid factor, cortisol, and true high-sensitivity CRP - a comprehensive, doctor-grade workup for a thorough yearly review."
+      },
+      {
+        "q": "Is the Full Body Checkup - Ultra (Men) package tested at NABL-accredited labs?",
+        "a": "Yes. Every test in the Full Body Checkup - Ultra (Men) package is processed at NABL-accredited labs run by Agilus Diagnostics (formerly SRL Diagnostics), our official diagnostics partner."
+      }
+    ]
+  },
+  {
+    "id": "PKG-FBCUW",
+    "slug": "full-body-checkup-ultra-women",
+    "name": "Full Body Checkup - Ultra (Women)",
+    "code": "PKG-FBCUW",
+    "category": "Full Body Checkups",
+    "price": 4199,
+    "mrp": 13600,
+    "tagline": "100-Parameter Ultimate Screen with Ovarian Marker",
+    "description": "Our most complete annual checkup for women. Everything in Pro Max, plus folic acid, rheumatoid factor, cortisol, and true high-sensitivity CRP - a comprehensive, doctor-grade workup for a thorough yearly review.",
+    "constituents": [
+      {
+        "name": "CBC-5, EDTA Whole Blood",
+        "slug": "cbc-5-edta-whole-blood",
+        "price": 400
+      },
+      {
+        "name": "Fasting Blood Sugar (FBS)",
+        "slug": "glucose-fasting-fluoride-plasma",
+        "price": 80
+      },
+      {
+        "name": "Calcium, Serum",
+        "slug": "calcium-serum",
+        "price": 255
+      },
+      {
+        "name": "Urinalysis",
+        "slug": "urinalysis",
+        "price": 200
+      },
+      {
+        "name": "Free Triiodothyronine (FT3), Serum",
+        "slug": "free-triiodothyronine-ft3-serum",
+        "price": 500
+      },
+      {
+        "name": "Free Thyroxine (FT4), Serum",
+        "slug": "free-thyroxine-ft4-serum",
+        "price": 500
+      },
+      {
+        "name": "TSH 3rd Gen Ultrasensitive, Serum",
+        "slug": "tsh-3rd-gen-ultrasensitive-serum",
+        "price": 380
+      },
+      {
+        "name": "HbA1c (Glycosylated Haemoglobin)",
+        "slug": "glycosylated-hemoglobin-hba1c",
+        "price": 600
+      },
+      {
+        "name": "Lipid Profile",
+        "slug": "lipid-profile-serum",
+        "price": 650
+      },
+      {
+        "name": "Kidney Function Test (KFT)",
+        "slug": "kidney-function-test",
+        "price": 1000
+      },
+      {
+        "name": "Liver Function Profile (LFT)",
+        "slug": "liver-function-profile-serum",
+        "price": 900
+      },
+      {
+        "name": "Vitamin D Total (25-Hydroxyvitamin D), Serum",
+        "slug": "vitamin-d-total-25-hydroxyvitamin-d-serum",
+        "price": 1750
+      },
+      {
+        "name": "Vitamin B12 (Cyanocobalamin), Serum",
+        "slug": "vitamin-b12-cyanocobalamine-serum",
+        "price": 1350
+      },
+      {
+        "name": "Iron, Serum",
+        "slug": "iron-serum",
+        "price": 605
+      },
+      {
+        "name": "High Sensitivity C-Reactive Protein, Serum",
+        "slug": "high-sensitivity-c-reactive-protein-serum",
+        "price": 1000
+      },
+      {
+        "name": "Phosphorus, Serum",
+        "slug": "phosphorus-serum",
+        "price": 255
+      },
+      {
+        "name": "Total Iron Binding Capacity, Serum",
+        "slug": "total-iron-binding-capacity-serum",
+        "price": 530
+      },
+      {
+        "name": "Magnesium, Serum",
+        "slug": "magnesium-serum",
+        "price": 440
+      },
+      {
+        "name": "Folic Acid, Serum",
+        "slug": "folic-acid-serum",
+        "price": 1400
+      },
+      {
+        "name": "Rheumatoid Factor, Serum",
+        "slug": "rheumatoid-factor-serum",
+        "price": 800
+      },
+      {
+        "name": "Cortisol, Serum",
+        "slug": "cortisol-serum",
+        "price": 800
+      },
+      {
+        "name": "CA 125 (Ovarian Cancer Monitor), Serum",
+        "slug": "ca-125-ovarian-cancer-monitor-serum",
+        "price": 1550
+      }
+    ],
+    "needsContent": false,
+    "eta": "12-24 hours",
+    "faqs": [
+      {
+        "q": "Can I book the Full Body Checkup - Ultra (Women) package near me in Bangalore?",
+        "a": "Yes - the Full Body Checkup - Ultra (Women) package is available for home sample collection across Bangalore, including JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road. No need to visit a lab; book online and we'll send a phlebotomist to you."
+      },
+      {
+        "q": "What is the price of the Full Body Checkup - Ultra (Women) package in Bangalore?",
+        "a": "The Full Body Checkup - Ultra (Women) package costs Rs. 4,199 (down from Rs. 13,600 MRP) for all 22 tests included, with home collection at no extra charge and no advance payment."
+      },
+      {
+        "q": "Is home collection available for the Full Body Checkup - Ultra (Women) package?",
+        "a": "Yes. All 22 tests included in the Full Body Checkup - Ultra (Women) package are collected in a single home visit by a trained phlebotomist. Reports are typically ready in 12-24 hours."
+      },
+      {
+        "q": "What does the Full Body Checkup - Ultra (Women) package include?",
+        "a": "Our most complete annual checkup for women. Everything in Pro Max, plus folic acid, rheumatoid factor, cortisol, and true high-sensitivity CRP - a comprehensive, doctor-grade workup for a thorough yearly review."
+      },
+      {
+        "q": "Is the Full Body Checkup - Ultra (Women) package tested at NABL-accredited labs?",
+        "a": "Yes. Every test in the Full Body Checkup - Ultra (Women) package is processed at NABL-accredited labs run by Agilus Diagnostics (formerly SRL Diagnostics), our official diagnostics partner."
+      }
+    ]
+  },
+  {
     "id": "PKG-AHC",
     "slug": "advanced-heart-checkup",
     "name": "Advanced Heart Checkup",
