@@ -1,12 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { CartProvider } from "@/lib/cart-context";
 import { UIProvider } from "@/lib/ui-context";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SearchModal from "@/components/SearchModal";
 import CartDrawer from "@/components/CartDrawer";
-import { Contentsquare } from "./contentsquare";
 import { getFeaturedCoupon } from "@/lib/coupon-config";
 import { BUSINESS_NAME, SITE_URL, BOOKING_PHONE, SERVICE_AREAS, GMB_RATING, GMB_PROFILE_URL } from "@/lib/site-config";
 
@@ -79,7 +79,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
-        <Contentsquare />
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "ypv0iaj9lx");`,
+          }}
+        />
         <CartProvider>
           <UIProvider>
             <Header featuredCoupon={featuredCoupon} />
