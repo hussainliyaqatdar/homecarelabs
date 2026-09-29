@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SearchModal from "@/components/SearchModal";
 import CartDrawer from "@/components/CartDrawer";
+import { Contentsquare } from "./contentsquare";
 import { getFeaturedCoupon } from "@/lib/coupon-config";
 import { BUSINESS_NAME, SITE_URL, BOOKING_PHONE, SERVICE_AREAS, GMB_RATING, GMB_PROFILE_URL } from "@/lib/site-config";
 
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <Contentsquare />
         <CartProvider>
           <UIProvider>
             <Header featuredCoupon={featuredCoupon} />
