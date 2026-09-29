@@ -15,14 +15,14 @@ const SLIDES: Slide[] = [
     subhead: "Comprehensive full body checkups for professionals who'd rather catch a problem early than manage one later.",
   },
   {
-    image: "/images/hero-home-collection.png",
+    image: "/images/hero-home-collection.webp",
     alt: "A phlebotomist in gloves and a mask visits a pregnant woman at home to collect a blood sample, using a professional collection kit with labelled sample tubes and a sharps container.",
     heading: "Your Pregnancy, Cared For At Home",
     subhead:
       "Accurate hormone panels, NIPT and other specialised DNA tests - hospital-grade prenatal reports without leaving your couch, trusted by expecting mothers across Bangalore.",
   },
   {
-    image: "/images/senior-citizen-home-collection.png",
+    image: "/images/senior-citizen-home-collection.webp",
     alt: "A phlebotomist in gloves and a mask visits a senior citizen at home to draw a blood sample while he sits comfortably on his sofa, using a professional collection kit with labelled sample tubes and a sharps container.",
     heading: "Specialised Tests for Heart Health & Diabetes",
     subhead:
