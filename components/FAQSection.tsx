@@ -38,6 +38,22 @@ const FAQS = [
     a: "Yes. We provide authorised home sample collection for Agilus Diagnostics (formerly known as SRL Diagnostics), and work in partnership with Fortis Hospitals. Every sample we collect is processed in Agilus' NABL-accredited labs.",
   },
   {
+    q: "How do I find SRL Diagnostics near me?",
+    a: `You don't need to search for "SRL Diagnostics near me" and travel to a centre - as an authorised SRL Diagnostics (now Agilus Diagnostics) partner, we send a phlebotomist to collect your sample at home, anywhere we cover in Bangalore.`,
+  },
+  {
+    q: "How do I find Agilus Diagnostics near me for a home visit?",
+    a: "You've found it - we're an authorised Agilus Diagnostics home-collection partner in Bangalore. Just book online and a phlebotomist visits your address; there's no need to locate a physical centre nearby.",
+  },
+  {
+    q: "Do you offer SRL Diagnostics home collection in Bangalore?",
+    a: "Yes. SRL Diagnostics is now known as Agilus Diagnostics, and home collection is exactly what we do - book any test or package here and a trained phlebotomist comes to you, with your sample processed at Agilus' NABL-accredited lab.",
+  },
+  {
+    q: "What's the process for Agilus Diagnostics home collection?",
+    a: "Search for your test or package, add it to your cart, and pick a time slot that works for you. A trained phlebotomist visits your home to collect the sample, which is then processed at Agilus Diagnostics' NABL-accredited lab - with reports typically ready the same day.",
+  },
+  {
     q: "Which areas in Bangalore do you cover for home sample collection?",
     a: "We currently collect across JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road - and we'll gladly try to reach other parts of Bangalore too, just ask at checkout or by phone.",
   },

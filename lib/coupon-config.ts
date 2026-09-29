@@ -21,12 +21,12 @@ export type CouponConfig = CouponRule & {
 
 const COUPONS: CouponConfig[] = [
   {
-    code: "HEALTHY10",
+    code: "HEALTHY15",
     type: "percent",
-    value: 10,
-    // "Cart value above Rs. 999" - prices are whole rupees, so "above 999" is
-    // the same as "1,000 or more".
-    minCartValue: 1000,
+    value: 15,
+    // "Orders above Rs. 1,499" - prices are whole rupees, so "above 1499" is
+    // the same as "1,500 or more".
+    minCartValue: 1500,
     maxDiscount: 500,
     active: true,
     featured: true,

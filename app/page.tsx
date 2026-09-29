@@ -38,6 +38,18 @@ export default function Home() {
 
       <section>
         <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-gray-900">Popular health packages</h2>
+          <Link href="/search?q=full+body+checkup" className="text-sm text-brand hover:underline">See all</Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-4">
+          {popularPackages.map((p) => (
+            <PackageCard key={p.slug} pkg={p} />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-gray-900">Pregnancy Care</h2>
           <Link href="/search?q=pregnancy" className="text-sm text-brand hover:underline">See all</Link>
         </div>
@@ -61,18 +73,6 @@ export default function Home() {
             </div>
           </>
         )}
-      </section>
-
-      <section>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Popular health packages</h2>
-          <Link href="/search?q=full+body+checkup" className="text-sm text-brand hover:underline">See all</Link>
-        </div>
-        <div className="grid md:grid-cols-3 gap-4">
-          {popularPackages.map((p) => (
-            <PackageCard key={p.slug} pkg={p} />
-          ))}
-        </div>
       </section>
 
       <section>

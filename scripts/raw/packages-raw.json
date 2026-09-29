@@ -21,6 +21,41 @@
     "Type": "Package"
   },
   {
+    "Package Name": "Full Body Checkup - Pro",
+    "Category": "Full Body Checkups",
+    "Code": "PKG-FBCP",
+    "Package Price (Rs.)": 2599,
+    "Type": "Package"
+  },
+  {
+    "Package Name": "Full Body Checkup - Pro Max (Men)",
+    "Category": "Full Body Checkups",
+    "Code": "PKG-FBCPMM",
+    "Package Price (Rs.)": 3099,
+    "Type": "Package"
+  },
+  {
+    "Package Name": "Full Body Checkup - Pro Max (Women)",
+    "Category": "Full Body Checkups",
+    "Code": "PKG-FBCPMW",
+    "Package Price (Rs.)": 3099,
+    "Type": "Package"
+  },
+  {
+    "Package Name": "Full Body Checkup - Ultra (Men)",
+    "Category": "Full Body Checkups",
+    "Code": "PKG-FBCUM",
+    "Package Price (Rs.)": 4199,
+    "Type": "Package"
+  },
+  {
+    "Package Name": "Full Body Checkup - Ultra (Women)",
+    "Category": "Full Body Checkups",
+    "Code": "PKG-FBCUW",
+    "Package Price (Rs.)": 4199,
+    "Type": "Package"
+  },
+  {
     "Package Name": "Advanced Heart Checkup",
     "Category": "Heart Health",
     "Code": "PKG-AHC",
