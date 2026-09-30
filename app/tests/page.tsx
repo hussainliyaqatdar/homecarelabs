@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import TestCard from "@/components/TestCard";
 import SectionSearch from "@/components/SectionSearch";
-import { allTests, search } from "@/lib/catalog";
+import { search, getTestsOrderedByPrescribingFrequency } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "All Tests",
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 const PAGE_SIZE = 30;
 
-// Most-booked "Routine" tests first, then the rest of the catalog - stable
-// sort so each group keeps its original catalog order.
-const sortedTests = [...allTests].sort((a, b) => (a.popular === b.popular ? 0 : a.popular ? -1 : 1));
+// Tests doctors prescribe most often lead the list (ranked by prescribing
+// frequency), then the rest of the catalog in its existing order.
+const sortedTests = getTestsOrderedByPrescribingFrequency();
 
 export default function TestsPage({ searchParams }: { searchParams: { page?: string; q?: string } }) {
   const q = searchParams.q?.trim() || "";

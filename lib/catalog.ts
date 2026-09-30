@@ -2,6 +2,7 @@ import testsData from "@/data/tests.json";
 import packagesData from "@/data/packages.json";
 import type { TestItem, PackageItem } from "./types";
 import { aliasMatchSlugs } from "./aliases";
+import { CC_SPRF_TEST_SLUGS } from "./cc-sprf-tests";
 
 // Strikethrough reference price for individual tests: +20%, rounded up to
 // the next multiple of 50, minus 1 (e.g. 100 -> 120 -> 150 -> 149). The
@@ -29,6 +30,22 @@ function sortWithPriority(categories: string[]): string[] {
 
 export function getTestBySlug(slug: string): TestItem | undefined {
   return allTests.find((t) => t.slug === slug);
+}
+
+// The tests doctors prescribe most often (Agilus' "CC SPRF" list), ranked by
+// prescribing frequency - used as the search modal's default Tests listing
+// and to lead the "All Tests" page, in place of a plain popularity flag.
+const testBySlug = new Map(allTests.map((t) => [t.slug, t]));
+export function getFrequentlyPrescribedTests() {
+  return CC_SPRF_TEST_SLUGS.map((slug) => testBySlug.get(slug)).filter((t) => t !== undefined);
+}
+
+// Full catalog, frequently-prescribed tests first (in rank order), then
+// everything else in its existing catalog order.
+export function getTestsOrderedByPrescribingFrequency() {
+  const ranked = getFrequentlyPrescribedTests();
+  const rankedSlugs = new Set(ranked.map((t) => t.slug));
+  return [...ranked, ...allTests.filter((t) => !rankedSlugs.has(t.slug))];
 }
 
 export function getPackageBySlug(slug: string): PackageItem | undefined {

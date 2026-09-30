@@ -7,7 +7,7 @@ import PackageCard from "@/components/PackageCard";
 import HeroCarousel from "@/components/HeroCarousel";
 import MoreWaysToBook from "@/components/MoreWaysToBook";
 import FAQSection from "@/components/FAQSection";
-import { allTests, allPackages } from "@/lib/catalog";
+import { allTests, allPackages, getFrequentlyPrescribedTests } from "@/lib/catalog";
 import { SERVICE_AREAS } from "@/lib/site-config";
 
 const FEATURED_PREGNANCY_TEST_SLUGS = ["double-marker-test-serum", "nipt", "oral-glucose-tolerance-test-gestational"];
@@ -16,7 +16,10 @@ export default function Home() {
   const popularPackages = allPackages.filter((p) => !p.needsContent).slice(0, 3);
   const pregnancyPackages = allPackages.filter((p) => /trimester|pcos|torch|infertility|menopause/i.test(p.name)).slice(0, 3);
   const pregnancyTests = FEATURED_PREGNANCY_TEST_SLUGS.map((slug) => allTests.find((t) => t.slug === slug)).filter(Boolean) as typeof allTests;
-  const popularTests = allTests.filter((t) => t.popular).slice(0, 6);
+  // Top 9 tests by prescribing frequency (see lib/cc-sprf-tests.ts) - the
+  // ranking already leads with the routine GP/gynaecologist panel (CBC,
+  // urine routine, lipid, liver, kidney, HbA1c, thyroid, Vitamin D/B12).
+  const popularTests = getFrequentlyPrescribedTests().slice(0, 9);
 
   return (
     <div className="flex flex-col gap-16">
