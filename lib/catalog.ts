@@ -32,11 +32,20 @@ export function getTestBySlug(slug: string): TestItem | undefined {
   return allTests.find((t) => t.slug === slug);
 }
 
-// The tests doctors prescribe most often (Agilus' "CC SPRF" list) - used as
-// the search modal's default Tests listing, in place of a plain popularity flag.
+// The tests doctors prescribe most often (Agilus' "CC SPRF" list), ranked by
+// prescribing frequency - used as the search modal's default Tests listing
+// and to lead the "All Tests" page, in place of a plain popularity flag.
 const testBySlug = new Map(allTests.map((t) => [t.slug, t]));
 export function getFrequentlyPrescribedTests() {
   return CC_SPRF_TEST_SLUGS.map((slug) => testBySlug.get(slug)).filter((t) => t !== undefined);
+}
+
+// Full catalog, frequently-prescribed tests first (in rank order), then
+// everything else in its existing catalog order.
+export function getTestsOrderedByPrescribingFrequency() {
+  const ranked = getFrequentlyPrescribedTests();
+  const rankedSlugs = new Set(ranked.map((t) => t.slug));
+  return [...ranked, ...allTests.filter((t) => !rankedSlugs.has(t.slug))];
 }
 
 export function getPackageBySlug(slug: string): PackageItem | undefined {
