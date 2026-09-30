@@ -2,6 +2,7 @@ import testsData from "@/data/tests.json";
 import packagesData from "@/data/packages.json";
 import type { TestItem, PackageItem } from "./types";
 import { aliasMatchSlugs } from "./aliases";
+import { CC_SPRF_TEST_SLUGS } from "./cc-sprf-tests";
 
 // Strikethrough reference price for individual tests: +20%, rounded up to
 // the next multiple of 50, minus 1 (e.g. 100 -> 120 -> 150 -> 149). The
@@ -29,6 +30,13 @@ function sortWithPriority(categories: string[]): string[] {
 
 export function getTestBySlug(slug: string): TestItem | undefined {
   return allTests.find((t) => t.slug === slug);
+}
+
+// The tests doctors prescribe most often (Agilus' "CC SPRF" list) - used as
+// the search modal's default Tests listing, in place of a plain popularity flag.
+const testBySlug = new Map(allTests.map((t) => [t.slug, t]));
+export function getFrequentlyPrescribedTests() {
+  return CC_SPRF_TEST_SLUGS.map((slug) => testBySlug.get(slug)).filter((t) => t !== undefined);
 }
 
 export function getPackageBySlug(slug: string): PackageItem | undefined {

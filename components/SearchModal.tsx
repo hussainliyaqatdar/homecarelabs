@@ -1,13 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { allTests, allPackages, search, displayAliases } from "@/lib/catalog";
+import { allPackages, getFrequentlyPrescribedTests, getPackageCategories, search, displayAliases } from "@/lib/catalog";
 import { useCartSummary } from "@/lib/cart-context";
 import { useUI } from "@/lib/ui-context";
 import AddToCartButton from "./AddToCartButton";
 import type { TestItem } from "@/lib/types";
 
 const RESULT_LIMIT = 30;
+// Sorted with "Full Body Checkups" first (see lib/catalog.ts's PRIORITY_CATEGORIES) -
+// that ordering is also what makes it the sub-tab's default selection below.
+const PACKAGE_CATEGORIES = getPackageCategories();
 
 const ClockIcon = () => (
   <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -28,6 +31,7 @@ export default function SearchModal() {
   const { count, total, discount, coupon } = useCartSummary();
   const [tab, setTab] = useState<"tests" | "packages">("tests");
   const [query, setQuery] = useState("");
+  const [packageCategory, setPackageCategory] = useState(PACKAGE_CATEGORIES[0]);
 
   useEffect(() => {
     if (!searchModalOpen) return;
@@ -49,22 +53,24 @@ export default function SearchModal() {
   const rows: Row[] = useMemo(() => {
     const kind = tab === "tests" ? "test" : "package";
     if (query.trim().length >= 1) {
-      return search(query, RESULT_LIMIT)
-        .filter((r) => r.kind === kind)
-        .map((r) =>
-          r.kind === "test"
-            ? testRow(r.item)
-            : { kind: "package" as const, slug: r.item.slug, name: r.item.name, price: r.item.price, mrp: r.item.mrp, eta: r.item.eta, sub: r.item.tagline }
-        );
+      const matches = search(query, RESULT_LIMIT).filter((r) => r.kind === kind);
+      const scoped = kind === "package" ? matches.filter((r) => r.item.category === packageCategory) : matches;
+      return scoped.map((r) =>
+        r.kind === "test"
+          ? testRow(r.item)
+          : { kind: "package" as const, slug: r.item.slug, name: r.item.name, price: r.item.price, mrp: r.item.mrp, eta: r.item.eta, sub: r.item.tagline }
+      );
     }
     if (kind === "test") {
-      return allTests.filter((t) => t.popular).slice(0, RESULT_LIMIT).map(testRow);
+      // Tests doctors prescribe most often (Agilus' "CC SPRF" list) lead the
+      // default listing - shown in full rather than capped to RESULT_LIMIT.
+      return getFrequentlyPrescribedTests().map(testRow);
     }
     return allPackages
-      .filter((p) => !p.needsContent)
+      .filter((p) => !p.needsContent && p.category === packageCategory)
       .slice(0, RESULT_LIMIT)
       .map((p) => ({ kind: "package" as const, slug: p.slug, name: p.name, price: p.price, mrp: p.mrp, eta: p.eta, sub: p.tagline }));
-  }, [tab, query]);
+  }, [tab, query, packageCategory]);
 
   if (!searchModalOpen) return null;
 
@@ -109,12 +115,32 @@ export default function SearchModal() {
               </button>
             ))}
           </div>
+
+          {tab === "packages" && (
+            <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-4 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Package category">
+              {PACKAGE_CATEGORIES.map((c) => (
+                <button
+                  key={c}
+                  role="tab"
+                  aria-selected={packageCategory === c}
+                  onClick={() => setPackageCategory(c)}
+                  className={`shrink-0 px-3 py-1 rounded-full border text-xs font-medium whitespace-nowrap transition ${
+                    packageCategory === c ? "bg-brand text-white border-brand" : "bg-white text-gray-600 border-gray-300 hover:border-brand"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-2 min-h-0">
           {rows.length === 0 && (
             <p className="text-sm text-gray-500 py-8 text-center">
-              No {tab} match "{query}". Try a shorter or more general term.
+              {query.trim()
+                ? `No ${tab} match "${query}"${tab === "packages" ? ` in ${packageCategory}` : ""}. Try a shorter or more general term.`
+                : `No packages in ${packageCategory} yet.`}
             </p>
           )}
           {rows.map((r) => (
