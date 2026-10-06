@@ -5,7 +5,9 @@ import { saveBooking } from "@/lib/store";
 import { sendOwnerNotification } from "@/lib/email";
 import { findCoupon } from "@/lib/coupon-config";
 import { computeDiscount } from "@/lib/coupon-rules";
-import type { Booking, CartLine } from "@/lib/types";
+import { hasConsult, isOfferEligible, priceWithOffer } from "@/lib/consult-offers";
+import { getConsultDoctor } from "@/lib/consult-doctors";
+import type { Booking, BookingLineItem, CartLine } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -29,15 +31,41 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "That slot was just booked, please pick another" }, { status: 409 });
   }
 
-  const items = cart.map((line) => {
+  // Consultation offers come from the browser, so check them before trusting
+  // them: only the comparison-page packages qualify, an order with a
+  // consultation needs a doctor, and that doctor must exist.
+  for (const line of cart) {
+    if (!line.offer) continue;
+    const { variant, doctorId } = line.offer;
+    if (!isOfferEligible(line.kind, line.slug) || (variant !== "addon" && variant !== "included")) {
+      return NextResponse.json({ error: "An item in your cart is no longer available with that offer. Please remove it and add it again." }, { status: 400 });
+    }
+    if (hasConsult(line.offer) && !doctorId) {
+      return NextResponse.json({ error: "Please choose a doctor for your follow-up consultation." }, { status: 400 });
+    }
+    if (doctorId && !getConsultDoctor(doctorId)) {
+      return NextResponse.json({ error: "The doctor you chose is no longer available. Please choose another." }, { status: 400 });
+    }
+  }
+
+  const items: BookingLineItem[] = cart.map((line) => {
     const source = line.kind === "test" ? allTests : allPackages;
     const found = source.find((x) => x.slug === line.slug);
     if (!found) throw new Error(`Unknown ${line.kind} ${line.slug}`);
-    const mrp = found.mrp ?? found.price;
+    // Keep only the fields we validated above, plus a copy of the doctor's name.
+    const offer = line.offer
+      ? {
+          variant: line.offer.variant,
+          ...(line.offer.variant === "addon" && line.offer.consult === true ? { consult: true } : {}),
+          // A doctor only means something when the order has a consultation.
+          ...(hasConsult(line.offer) ? { doctorId: line.offer.doctorId!, doctorName: getConsultDoctor(line.offer.doctorId)!.name } : {}),
+        }
+      : undefined;
+    const { price, mrp } = priceWithOffer(found, offer);
     // Tests are shown to customers under a friendly name, but the lab knows
     // them by their catalog name - keep that on the booking for fulfillment.
     const labName = "labName" in found ? found.labName : undefined;
-    return { kind: line.kind, slug: found.slug, name: found.name, labName, qty: line.qty, mrp, price: found.price };
+    return { kind: line.kind, slug: found.slug, name: found.name, labName, qty: line.qty, mrp, price, ...(offer ? { offer } : {}) };
   });
 
   const subtotalMrp = items.reduce((s, i) => s + i.mrp * i.qty, 0);
@@ -50,6 +78,10 @@ export async function POST(req: NextRequest) {
   let appliedCode: string | undefined;
   let couponDiscount = 0;
   if (couponCode) {
+    // The consultation-offer packages are priced with no room for a coupon.
+    if (cart.some((line) => line.offer)) {
+      return NextResponse.json({ error: "Coupons can't be used with this offer. Please remove the coupon and try again." }, { status: 400 });
+    }
     const coupon = findCoupon(couponCode);
     if (!coupon) {
       return NextResponse.json({ error: "That coupon code is no longer valid. Please remove it and try again." }, { status: 400 });
