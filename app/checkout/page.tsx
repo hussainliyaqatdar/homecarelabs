@@ -2,25 +2,23 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart, useCartSummary } from "@/lib/cart-context";
-import { allTests, allPackages } from "@/lib/catalog";
+import { describeConsult, hasConsult } from "@/lib/consult-offers";
 import { getUpcomingDates, formatDateLabel } from "@/lib/booking-dates";
+import DoctorPicker from "@/components/DoctorPicker";
 
 const UPCOMING_DATES = getUpcomingDates();
 
 export default function CheckoutPage() {
-  const { lines, clear } = useCart();
-  const { coupon, discount, total, removeCoupon } = useCartSummary();
+  const { lines, clear, setConsultDoctor } = useCart();
+  // Priced items come from the cart summary so offer pricing (e.g. an included
+  // consultation) is shown the same way here as in the cart drawer.
+  const { items, coupon, discount, total, removeCoupon } = useCartSummary();
   const router = useRouter();
 
-  const items = lines
-    .map((l) => {
-      const source = l.kind === "test" ? allTests : allPackages;
-      const found = source.find((x) => x.slug === l.slug);
-      return found ? { ...found, kind: l.kind, qty: l.qty } : null;
-    })
-    .filter(Boolean) as { kind: "test" | "package"; slug: string; name: string; qty: number; price: number }[];
-
-  const subtotalPrice = items.reduce((s, i) => s + i.price * i.qty, 0);
+  // A follow-up consultation (added in the cart, or bundled into the package)
+  // needs a doctor - picked here, after the collection details.
+  const needsDoctor = lines.some((l) => hasConsult(l.offer));
+  const doctorId = lines.find((l) => hasConsult(l.offer) && l.offer?.doctorId)?.offer?.doctorId ?? null;
 
   const [form, setForm] = useState({
     name: "", whatsapp: "",
@@ -104,6 +102,10 @@ export default function CheckoutPage() {
     }
     if (!date || !slot) {
       setError("Please choose a collection date and time slot.");
+      return;
+    }
+    if (needsDoctor && !doctorId) {
+      setError("Please choose a doctor for your follow-up consultation.");
       return;
     }
     setSubmitting(true);
@@ -288,15 +290,30 @@ export default function CheckoutPage() {
           </div>
           <p className="text-xs text-gray-500">Our phlebotomist arrives within 60 minutes of your slot start time.</p>
         </div>
+
+        {needsDoctor && (
+          <div className="bg-white border rounded-lg p-4 flex flex-col gap-3">
+            <div>
+              <h2 className="font-semibold text-gray-900">Choose your doctor</h2>
+              <p className="text-sm text-gray-600">
+                For your follow-up consultation. Once your report is ready, we'll send you a link on WhatsApp to schedule it.
+              </p>
+            </div>
+            <DoctorPicker value={doctorId} onChange={setConsultDoctor} />
+          </div>
+        )}
       </div>
 
       <div className="md:col-span-1">
         <div className="bg-brand-light rounded-lg p-4 flex flex-col gap-2 md:sticky md:top-20">
           <h2 className="font-semibold text-gray-900">Order summary</h2>
           {items.map((i) => (
-            <div key={`${i.kind}-${i.slug}`} className="flex justify-between text-sm">
-              <span>{i.name} {i.qty > 1 ? `× ${i.qty}` : ""}</span>
-              <span>Rs. {(i.price * i.qty).toLocaleString("en-IN")}</span>
+            <div key={`${i.kind}-${i.slug}`} className="flex justify-between gap-3 text-sm">
+              <span>
+                {i.name} {i.qty > 1 ? `× ${i.qty}` : ""}
+                {describeConsult(i.offer) && <span className="block text-xs text-brand-dark">{describeConsult(i.offer)}</span>}
+              </span>
+              <span className="shrink-0">Rs. {(i.price * i.qty).toLocaleString("en-IN")}</span>
             </div>
           ))}
           {discount > 0 && coupon && (

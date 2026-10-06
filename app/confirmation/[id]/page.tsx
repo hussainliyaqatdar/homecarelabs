@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getBooking } from "@/lib/store";
 import { amountDue } from "@/lib/booking-totals";
+import { describeConsult, hasConsult } from "@/lib/consult-offers";
 
 export default function ConfirmationPage({ params }: { params: { id: string } }) {
   const booking = getBooking(params.id);
@@ -14,6 +15,9 @@ export default function ConfirmationPage({ params }: { params: { id: string } })
     );
   }
 
+  const consultItem = booking.items.find((i) => hasConsult(i.offer));
+  const doctorName = consultItem?.offer?.doctorName;
+
   return (
     <div className="max-w-xl mx-auto flex flex-col gap-6">
       <div className="text-center">
@@ -25,9 +29,12 @@ export default function ConfirmationPage({ params }: { params: { id: string } })
       <div className="bg-white border rounded-lg p-4 flex flex-col gap-3">
         <h2 className="font-semibold text-gray-900">What you booked</h2>
         {booking.items.map((i) => (
-          <div key={`${i.kind}-${i.slug}`} className="flex justify-between text-sm">
-            <span>{i.name} {i.qty > 1 ? `× ${i.qty}` : ""}</span>
+          <div key={`${i.kind}-${i.slug}`} className="flex justify-between gap-3 text-sm">
             <span>
+              {i.name} {i.qty > 1 ? `× ${i.qty}` : ""}
+              {describeConsult(i.offer) && <span className="block text-xs text-brand-dark">{describeConsult(i.offer)}</span>}
+            </span>
+            <span className="shrink-0">
               {i.mrp > i.price && <span className="line-through text-gray-400 mr-1">Rs. {(i.mrp * i.qty).toLocaleString("en-IN")}</span>}
               <strong>Rs. {(i.price * i.qty).toLocaleString("en-IN")}</strong>
             </span>
@@ -52,6 +59,28 @@ export default function ConfirmationPage({ params }: { params: { id: string } })
         <p><strong>Time window:</strong> {booking.slot}</p>
         <p><strong>Address:</strong> {booking.patient.addressLine}, {booking.patient.locality}, {booking.patient.city} - {booking.patient.pincode}</p>
       </div>
+
+      {consultItem && (
+        <div className="bg-white border-2 border-brand rounded-lg p-4 flex flex-col gap-3">
+          <div>
+            <h2 className="font-semibold text-gray-900">Your follow-up doctor consultation</h2>
+            {doctorName && (
+              <p className="text-sm text-gray-700">
+                Doctor: <strong>{doctorName}</strong>
+              </p>
+            )}
+          </div>
+          <p className="text-sm text-gray-700">
+            Once your report is ready, we'll send you a <strong>link on WhatsApp</strong> (to <strong>{booking.patient.whatsapp}</strong>)
+            to schedule your doctor consultation. Just pick a time that suits you - there's nothing more you need to do now.
+          </p>
+          <ol className="flex flex-col gap-1 text-sm text-gray-600">
+            <li>1. Our phlebotomist collects your sample at home.</li>
+            <li>2. Your report arrives on WhatsApp.</li>
+            <li>3. You get a WhatsApp link to schedule your consultation{doctorName ? ` with ${doctorName}` : ""}.</li>
+          </ol>
+        </div>
+      )}
 
       <p className="text-sm text-gray-600 text-center">
         Our phlebotomist will arrive within 60 minutes of your slot start time, and your report

@@ -51,10 +51,23 @@ export type PackageItem = {
   faqs?: ProductFaq[];
 };
 
+// Attached to a package that was added from one of the two consultation-offer
+// comparison pages (lib/consult-offers.ts). "addon": the usual price, plus a
+// follow-up consultation the customer can add in the cart. "included": the
+// consultation is bundled into a higher package price.
+export type CartLineOffer = {
+  variant: "addon" | "included";
+  // Add-on only: the customer added the consultation (in the cart).
+  consult?: boolean;
+  // The doctor, chosen at checkout once a consultation is part of the order.
+  doctorId?: string;
+};
+
 export type CartLine = {
   kind: "test" | "package";
   slug: string;
   qty: number;
+  offer?: CartLineOffer;
 };
 
 export type BookingPatient = {
@@ -81,6 +94,9 @@ export type BookingLineItem = {
   qty: number;
   mrp: number;
   price: number;
+  // Present when the package came from a consultation-offer page. The doctor's
+  // name is copied in so the booking stays readable if the doctor list changes.
+  offer?: CartLineOffer & { doctorName?: string };
 };
 
 export type Booking = {
