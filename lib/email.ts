@@ -7,6 +7,8 @@ import type { Booking } from "./types";
 
 const OWNER_EMAIL = process.env.OWNER_EMAIL || "owner@example.com";
 const FROM_EMAIL = process.env.FROM_EMAIL || "bookings@example.com";
+// Shown to recipients as "Eazy Diagnostics <address>" unless FROM_EMAIL already carries a name.
+const FROM_ADDRESS = FROM_EMAIL.includes("<") ? FROM_EMAIL : `${BUSINESS_NAME} <${FROM_EMAIL}>`;
 
 function money(n: number) {
   return `Rs. ${n.toLocaleString("en-IN")}`;
@@ -99,7 +101,7 @@ async function deliver(to: string, subject: string, html: string) {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: FROM_EMAIL, to, subject, html }),
+      body: JSON.stringify({ from: FROM_ADDRESS, to, subject, html }),
     });
     // Resend answers a rejected email (bad key, unverified sender) with an error
     // status rather than throwing - make that visible in the server log.

@@ -1,4 +1,7 @@
-export const BUSINESS_NAME = process.env.BUSINESS_NAME || "Agilus (SRL) Diagnostics";
+export const BUSINESS_NAME = process.env.BUSINESS_NAME || "Eazy Diagnostics";
+// The lab we are an authorised partner of, and the standard way to say so.
+export const PARTNER_NAME = "Agilus (SRL) Diagnostics";
+export const PARTNER_TAGLINE = `An authorised partner of ${PARTNER_NAME}`;
 export const BOOKING_PHONE = process.env.BOOKING_PHONE || "+91 70197 64500";
 export const BOOKING_PHONE_TEL = BOOKING_PHONE.replace(/[^\d+]/g, "");
 // Same number handles both calls and WhatsApp chat; wa.me needs digits only, no "+".

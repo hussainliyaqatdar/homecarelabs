@@ -1,9 +1,11 @@
+import { BUSINESS_NAME, PARTNER_TAGLINE } from "@/lib/site-config";
+
 // Nested-hearts mark: a smaller heart cradled inside a larger one, reading as
 // "caring for two" (mother + baby) - warm and immediately legible at small
 // sizes (favicon, app icon) while staying on-brand (teal + coral).
 export function LogoMark({ className = "w-9 h-9" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 100 92" className={className} role="img" aria-label="Agilus (SRL) Diagnostics logo" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 100 92" className={className} role="img" aria-label={`${BUSINESS_NAME} logo`} xmlns="http://www.w3.org/2000/svg">
       <path
         d="M50 90 C22 70 2 50 2 27 C2 11 14 0 29 0 C39 0 47 6 50 15 C53 6 61 0 71 0 C86 0 98 11 98 27 C98 50 78 70 50 90 Z"
         fill="#0F6E6E"
@@ -21,11 +23,11 @@ export default function Logo({ className = "" }: { className?: string }) {
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <LogoMark />
       <span className="leading-tight">
-        <span className="block font-bold text-lg text-brand-dark tracking-tight">Agilus (SRL)</span>
+        <span className="block font-bold text-xl text-brand-dark tracking-tight">Eazy</span>
         <span className="block text-[10px] font-semibold text-brand-accent uppercase tracking-widest -mt-1">Diagnostics</span>
-        {/* Small, always-visible disclaimer: we are a partner centre, not Agilus
-            itself - keeps the name above from reading as a claim to be Agilus. */}
-        <span className="block text-[8px] font-normal text-gray-400 tracking-wide -mt-0.5">Authorised Centre</span>
+        {/* Small, always-visible line: we are a partner of the lab, not the lab
+            itself - keeps the brand name above from reading as a claim to be Agilus. */}
+        <span className="block text-[8px] font-normal text-gray-400 tracking-wide -mt-0.5">{PARTNER_TAGLINE}</span>
       </span>
     </span>
   );

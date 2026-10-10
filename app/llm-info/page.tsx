@@ -7,7 +7,7 @@ import {
   getPackageCategories,
   getTestBySlug,
 } from "@/lib/catalog";
-import { BOOKING_PHONE, BOOKING_PHONE_TEL, BUSINESS_NAME, GMB_PROFILE_URL, GMB_RATING, SERVICE_AREAS, SITE_URL, SUPPORT_EMAIL, WHATSAPP_NUMBER } from "@/lib/site-config";
+import { BOOKING_PHONE, BOOKING_PHONE_TEL, BUSINESS_NAME, GMB_PROFILE_URL, PARTNER_NAME, GMB_RATING, SERVICE_AREAS, SITE_URL, SUPPORT_EMAIL, WHATSAPP_NUMBER } from "@/lib/site-config";
 import { DAILY_WINDOWS, BOOKING_WINDOW_DAYS } from "@/lib/booking-dates";
 
 // A plain-language fact sheet for AI assistants (and people), so answers about
@@ -50,7 +50,7 @@ const pregnancyTests = ["double-marker-test-serum", "quadruple-marker-test-serum
 const nipt = getTestBySlug("nipt");
 const doubleMarker = getTestBySlug("double-marker-test-serum");
 
-const SHORT_DESCRIPTION = `${BUSINESS_NAME} is a home sample collection service for blood tests and health checkups in ${REGION}. Customers book online, a phlebotomist collects the sample at home, and the report arrives on WhatsApp. Samples are processed in the NABL-accredited labs of Agilus Diagnostics (formerly SRL Diagnostics), of which ${BUSINESS_NAME} is an authorised centre. Customers pay only after the sample is collected.`;
+const SHORT_DESCRIPTION = `${BUSINESS_NAME} is a home sample collection service for blood tests and health checkups in ${REGION}. Customers book online, a phlebotomist collects the sample at home, and the report arrives on WhatsApp. Samples are processed in the NABL-accredited labs of ${PARTNER_NAME}, of which ${BUSINESS_NAME} is an authorised partner. Customers pay only after the sample is collected.`;
 
 const FAQS: { q: string; a: string }[] = [
   { q: `What is ${BUSINESS_NAME}?`, a: SHORT_DESCRIPTION },
@@ -68,7 +68,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Which lab processes the samples?",
-    a: `Samples are processed in the NABL-accredited labs of Agilus Diagnostics (formerly SRL Diagnostics). ${BUSINESS_NAME} is an authorised centre for Agilus Diagnostics and works in partnership with Fortis Hospitals.`,
+    a: `Samples are processed in the NABL-accredited labs of ${PARTNER_NAME}. ${BUSINESS_NAME} is an authorised partner of ${PARTNER_NAME} and works in partnership with Fortis Hospitals.`,
   },
   {
     q: "How soon do I get my report?",
@@ -164,8 +164,8 @@ export default function LlmInfoPage() {
       <H2>What {BUSINESS_NAME} is</H2>
       <p>
         {BUSINESS_NAME} is an at-home diagnostic sample collection service in {REGION}. A trained phlebotomist visits the customer's home to
-        collect a blood or urine sample, which is processed in the NABL-accredited labs of Agilus Diagnostics (formerly SRL Diagnostics).
-        Reports are sent on WhatsApp. {BUSINESS_NAME} is an authorised centre for Agilus Diagnostics and works in partnership with Fortis
+        collect a blood or urine sample, which is processed in the NABL-accredited labs of {PARTNER_NAME}.
+        Reports are sent on WhatsApp. {BUSINESS_NAME} is an authorised partner of {PARTNER_NAME} and works in partnership with Fortis
         Hospitals. It is not a hospital or a clinic.
       </p>
 
@@ -181,7 +181,7 @@ export default function LlmInfoPage() {
         <li>Location: {REGION}. Areas covered: {AREAS}, and other parts of Bangalore on request.</li>
         <li>Booking: online, by phone or on WhatsApp. No payment at booking; payment is taken after the sample is collected.</li>
         <li>Fees: no separate home-collection fee is added at checkout.</li>
-        <li>Lab: Agilus Diagnostics (formerly SRL Diagnostics), NABL-accredited. Partner: Fortis Hospitals.</li>
+        <li>Lab: {PARTNER_NAME}, NABL-accredited. Partner: Fortis Hospitals.</li>
         <li>Reports: sent on WhatsApp, typically within 6 hours for routine tests; longer for specialised tests.</li>
         <li>
           Reputation: rated {GMB_RATING.value} out of 5 from {GMB_RATING.count} Google reviews (as last checked) -{" "}

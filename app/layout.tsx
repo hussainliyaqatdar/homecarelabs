@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import SearchModal from "@/components/SearchModal";
 import CartDrawer from "@/components/CartDrawer";
 import { getFeaturedCoupon } from "@/lib/coupon-config";
-import { BUSINESS_NAME, SITE_URL, BOOKING_PHONE, SERVICE_AREAS, GMB_RATING, GMB_PROFILE_URL } from "@/lib/site-config";
+import { BUSINESS_NAME, PARTNER_NAME, SITE_URL, BOOKING_PHONE, SERVICE_AREAS, GMB_RATING, GMB_PROFILE_URL } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: `Pregnancy Test & NIPT At Home in Bangalore | ${BUSINESS_NAME}`,
     template: `%s | ${BUSINESS_NAME}`,
   },
-  description: `Book NIPT, Double Marker & pregnancy blood tests for home collection in Bangalore - plus full body checkups and routine blood work. NABL-accredited, official Agilus Diagnostics (formerly SRL) partner. Pay only after your sample is collected.`,
+  description: `Book NIPT, Double Marker & pregnancy blood tests for home collection in Bangalore - plus full body checkups and routine blood work. NABL-accredited testing, and an authorised partner of Agilus (SRL) Diagnostics. Pay only after your sample is collected.`,
   keywords: [
     "pregnancy test near me",
     "pregnancy test at home",
@@ -36,6 +36,8 @@ export const metadata: Metadata = {
     "glucose tolerance test at home Bangalore",
     "book pregnancy test for wife",
     "home blood test Bangalore",
+    "Eazy Diagnostics",
+    "Eazy Diagnostics Bangalore",
     "Agilus Diagnostics",
     "SRL Diagnostics",
     "Agilus Diagnostics near me",
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: BUSINESS_NAME,
     title: `${BUSINESS_NAME} - Pregnancy Tests & Blood Test Collection At Home in Bangalore`,
-    description: `Book NIPT, Double Marker, Quadruple Marker and other pregnancy tests for home collection - plus full body checkups and routine blood work - across Bangalore. Official partner of Agilus Diagnostics (formerly SRL) and Fortis Hospitals. Pay only after your sample is collected.`,
+    description: `Book NIPT, Double Marker, Quadruple Marker and other pregnancy tests for home collection - plus full body checkups and routine blood work - across Bangalore. An authorised partner of Agilus (SRL) Diagnostics, in partnership with Fortis Hospitals. Pay only after your sample is collected.`,
   },
 };
 
@@ -72,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     geo: { "@type": "GeoCoordinates", latitude: 12.9026322, longitude: 77.5882842 },
     aggregateRating: { "@type": "AggregateRating", ratingValue: GMB_RATING.value, reviewCount: GMB_RATING.count },
     sameAs: [GMB_PROFILE_URL],
-    parentOrganization: [{ "@type": "MedicalOrganization", name: "Agilus Diagnostics", alternateName: "SRL Diagnostics" }, { "@type": "Hospital", name: "Fortis Hospitals" }],
+    parentOrganization: [{ "@type": "MedicalOrganization", name: PARTNER_NAME, alternateName: ["Agilus Diagnostics", "SRL Diagnostics"] }, { "@type": "Hospital", name: "Fortis Hospitals" }],
   };
 
   return (

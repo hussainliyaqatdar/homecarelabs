@@ -1,4 +1,4 @@
-import { BUSINESS_NAME, SITE_URL } from "@/lib/site-config";
+import { BUSINESS_NAME, PARTNER_NAME, SITE_URL } from "@/lib/site-config";
 
 export const dynamic = "force-static";
 
@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 export function GET() {
   const body = `# ${BUSINESS_NAME}
 
-> Home sample collection for blood tests and health checkups in Bangalore, India. A phlebotomist collects the sample at home, it is processed in the NABL-accredited labs of Agilus Diagnostics (formerly SRL Diagnostics), and the report arrives on WhatsApp. Customers pay only after the sample is collected.
+> Home sample collection for blood tests and health checkups in Bangalore, India. A phlebotomist collects the sample at home, it is processed in the NABL-accredited labs of ${PARTNER_NAME} (of which ${BUSINESS_NAME} is an authorised partner), and the report arrives on WhatsApp. Customers pay only after the sample is collected.
 
 ## Key pages
 
