@@ -1,7 +1,8 @@
 import { saveEmail } from "./store";
 import { amountDue } from "./booking-totals";
 import { describeConsult, hasConsult } from "./consult-offers";
-import { CONSULT_BOOKING_URL } from "./site-config";
+import { BUSINESS_NAME, CONSULT_BOOKING_URL, SUPPORT_EMAIL } from "./site-config";
+import { formatDays, formatWindows, type DoctorSignup } from "./doctor-onboarding";
 import type { Booking } from "./types";
 
 const OWNER_EMAIL = process.env.OWNER_EMAIL || "owner@example.com";
@@ -95,11 +96,14 @@ async function deliver(to: string, subject: string, html: string) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
   try {
-    await fetch("https://api.resend.com/emails", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({ from: FROM_EMAIL, to, subject, html }),
     });
+    // Resend answers a rejected email (bad key, unverified sender) with an error
+    // status rather than throwing - make that visible in the server log.
+    if (!res.ok) console.error(`Email to ${to} was rejected (HTTP ${res.status}): ${await res.text().catch(() => "")}`);
   } catch (err) {
     console.error("Email delivery failed, kept in dev inbox only:", err);
   }
@@ -108,5 +112,79 @@ async function deliver(to: string, subject: string, html: string) {
 export async function sendOwnerNotification(booking: Booking) {
   const { subject, html } = renderOwnerNotification(booking);
   saveEmail({ id: `${booking.id}-owner`, to: OWNER_EMAIL, toLabel: "owner", subject, html, sentAt: new Date().toISOString() });
+  await deliver(OWNER_EMAIL, subject, html);
+}
+
+// ---- Doctor sign-up (/for-doctors) ----
+
+function esc(value: string) {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+// Doctors type this in themselves, so it is escaped before going into the email.
+function signupRows(signup: DoctorSignup) {
+  const rows: [string, string][] = [
+    ["Name", esc(signup.fullName)],
+    ["Email", esc(signup.email)],
+    ["Specialty", esc(signup.specialty)],
+    ["Degree", esc(signup.degree)],
+    ["Available days", esc(formatDays(signup.days))],
+    ["Time windows (IST)", esc(formatWindows(signup.windows))],
+  ];
+  if (signup.notes) rows.push(["Availability notes", esc(signup.notes).replace(/\n/g, "<br>")]);
+  rows.push(["About you", esc(signup.about).replace(/\n/g, "<br>")]);
+  return rows
+    .map(
+      ([label, value]) => `
+    <tr>
+      <td style="padding:6px 12px 6px 0;vertical-align:top;color:#777;white-space:nowrap;">${label}</td>
+      <td style="padding:6px 0;vertical-align:top;">${value}</td>
+    </tr>`
+    )
+    .join("");
+}
+
+// Dev-inbox copies of these emails (/admin/inbox) hold doctors' personal details
+// and that page has no login, so they are only kept when running locally.
+function keepInDevInbox(email: Parameters<typeof saveEmail>[0]) {
+  if (process.env.NODE_ENV !== "production") saveEmail(email);
+}
+
+export function renderDoctorConfirmation(signup: DoctorSignup) {
+  const subject = "We've received your details - you'll go live within 48 hours";
+  const html = `
+  <div style="font-family:sans-serif;max-width:560px;margin:auto;color:#222;line-height:1.5;">
+    <h2 style="color:#0F6E6E;">Thank you, ${esc(signup.fullName)}!</h2>
+    <p>We've received your details to offer follow-up tele-consultations to patients on ${esc(BUSINESS_NAME)}.</p>
+    <p><strong>You'll go live within 48 hours.</strong> Our team is now setting up your profile and your tele-consultation calendar from the availability you shared, and we'll use this email address to coordinate your consultations.</p>
+    <h3 style="margin-bottom:4px;">What you submitted</h3>
+    <table style="border-collapse:collapse;font-size:14px;">${signupRows(signup)}</table>
+    <p>Spotted a mistake, or want to change your timings? Just email us at <a href="mailto:${esc(SUPPORT_EMAIL)}">${esc(SUPPORT_EMAIL)}</a>.</p>
+    <p style="color:#999;font-size:12px;">You're receiving this because this email address was used to sign up as a consulting doctor on ${esc(BUSINESS_NAME)}.</p>
+  </div>`;
+  return { subject, html };
+}
+
+export function renderOwnerDoctorAlert(signup: DoctorSignup, submittedAt: string, goLiveBy: string) {
+  const subject = `New doctor sign-up - ${signup.fullName} (${signup.specialty})`;
+  const html = `
+  <div style="font-family:sans-serif;max-width:560px;margin:auto;color:#222;line-height:1.5;">
+    <h2 style="color:#FF7A45;">New doctor sign-up</h2>
+    <p>Submitted ${esc(submittedAt)} (IST). It's in the Google Sheet with Status "New". <strong>Promised go-live: by ${esc(goLiveBy)} (IST).</strong></p>
+    <table style="border-collapse:collapse;font-size:14px;">${signupRows(signup)}</table>
+    <p style="color:#999;font-size:12px;">A confirmation email has already been sent to the doctor.</p>
+  </div>`;
+  return { subject, html };
+}
+
+export async function sendDoctorConfirmation(signup: DoctorSignup, id: string) {
+  const { subject, html } = renderDoctorConfirmation(signup);
+  keepInDevInbox({ id: `${id}-doctor`, to: signup.email, toLabel: "doctor", subject, html, sentAt: new Date().toISOString() });
+  await deliver(signup.email, subject, html);
+}
+
+export async function sendOwnerDoctorAlert(signup: DoctorSignup, id: string, submittedAt: string, goLiveBy: string) {
+  const { subject, html } = renderOwnerDoctorAlert(signup, submittedAt, goLiveBy);
+  keepInDevInbox({ id: `${id}-owner`, to: OWNER_EMAIL, toLabel: "owner", subject, html, sentAt: new Date().toISOString() });
   await deliver(OWNER_EMAIL, subject, html);
 }

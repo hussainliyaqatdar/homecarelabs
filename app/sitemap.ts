@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/search`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/llm-info`, changeFrequency: "monthly", priority: 0.7 },
   ];
 
   const packagePages = allPackages.map((p) => ({

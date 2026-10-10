@@ -10,7 +10,7 @@ export const SITE_URL = process.env.SITE_URL || "http://localhost:3000";
 // Booking link the team WhatsApps (by hand, once the report is ready) to customers
 // who opted for a follow-up doctor consultation. Shown in the owner's order email.
 export const CONSULT_BOOKING_URL =
-  process.env.CONSULT_BOOKING_URL || "https://cal.id/eazyhealthcare/partnership-call?user=eazyhealthcare";
+  process.env.CONSULT_BOOKING_URL || "https://cal.id/eazyhealthcare/follow-up-consultation";
 
 export const SERVICE_AREAS =["JP Nagar", "Jayanagar", "BTM Layout", "Banashankari", "Kanakpura Road"];
 
