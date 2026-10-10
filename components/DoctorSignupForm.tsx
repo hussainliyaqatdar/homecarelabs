@@ -45,6 +45,91 @@ const inputClass = (invalid: boolean) =>
     invalid ? "border-red-400" : "border-gray-300"
   }`;
 
+// Time as hour (1-12) + minutes + AM/PM dropdowns. The browser's own time box
+// follows each device's 12/24-hour setting, so doctors saw "17:00" or a
+// confusing picker; this always reads the same. The form keeps the time as
+// 24-hour "HH:MM" (what validation and the sheet use) - converted at the edges.
+// Hours offered for a 2nd and 3rd slot, chosen so they do not overlap each other.
+const NEW_SLOT_DEFAULTS: TimeWindow[] = [
+  { from: "17:00", to: "19:00" },
+  { from: "20:00", to: "21:00" },
+];
+const HOUR_OPTIONS = Array.from({ length: 12 }, (_, i) => i + 1);
+const MINUTE_STEPS = [0, 15, 30, 45];
+
+function parseTime(value: string) {
+  const [h, m] = value.split(":").map(Number);
+  return { hour: h % 12 === 0 ? 12 : h % 12, minute: m, pm: h >= 12 };
+}
+
+function buildTime(hour: number, minute: number, pm: boolean) {
+  return `${String((hour % 12) + (pm ? 12 : 0)).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+}
+
+function TimeSelect({
+  label,
+  value,
+  onChange,
+  invalid,
+  firstFieldId,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  invalid: boolean;
+  firstFieldId?: string;
+}) {
+  const t = parseTime(value);
+  const selectClass = `min-w-0 rounded-lg border bg-white px-2 py-2.5 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand ${
+    invalid ? "border-red-400" : "border-gray-300"
+  }`;
+  const minutes = Array.from(new Set([...MINUTE_STEPS, t.minute])).sort((a, b) => a - b);
+  return (
+    <div role="group" aria-label={label} className="flex min-w-0 items-center gap-1.5">
+      <select
+        id={firstFieldId}
+        aria-label={`${label}: hour`}
+        aria-invalid={invalid ? true : undefined}
+        value={t.hour}
+        onChange={(e) => onChange(buildTime(Number(e.target.value), t.minute, t.pm))}
+        className={`${selectClass} flex-1`}
+      >
+        {HOUR_OPTIONS.map((h) => (
+          <option key={h} value={h}>
+            {h}
+          </option>
+        ))}
+      </select>
+      <span aria-hidden="true" className="text-gray-500">
+        :
+      </span>
+      <select
+        aria-label={`${label}: minutes`}
+        aria-invalid={invalid ? true : undefined}
+        value={t.minute}
+        onChange={(e) => onChange(buildTime(t.hour, Number(e.target.value), t.pm))}
+        className={`${selectClass} flex-1`}
+      >
+        {minutes.map((m) => (
+          <option key={m} value={m}>
+            {String(m).padStart(2, "0")}
+          </option>
+        ))}
+      </select>
+      <select
+        aria-label={`${label}: AM or PM`}
+        aria-invalid={invalid ? true : undefined}
+        value={t.pm ? "PM" : "AM"}
+        onChange={(e) => onChange(buildTime(t.hour, t.minute, e.target.value === "PM"))}
+        className={`${selectClass} flex-[1.15]`}
+      >
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
+    </div>
+  );
+}
+
 function Field({
   id,
   label,
@@ -312,43 +397,40 @@ export default function DoctorSignupForm() {
         <div className="flex flex-col gap-2">
           <p className="text-sm font-medium text-gray-800">Hours</p>
           {form.windows.map((w, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <input
-                id={i === 0 ? "field-windows" : undefined}
-                type="time"
-                aria-label={`Window ${i + 1} start time`}
-                value={w.from}
-                onChange={(e) => setWindow(i, "from", e.target.value)}
-                aria-invalid={windowsError ? true : undefined}
-                className={`${inputClass(!!windowsError)} min-w-0 flex-1`}
-              />
-              <span className="text-sm text-gray-500">to</span>
-              <input
-                type="time"
-                aria-label={`Window ${i + 1} end time`}
-                value={w.to}
-                onChange={(e) => setWindow(i, "to", e.target.value)}
-                aria-invalid={windowsError ? true : undefined}
-                className={`${inputClass(!!windowsError)} min-w-0 flex-1`}
-              />
+            <div key={i} className="flex flex-col gap-2 rounded-lg border bg-white p-3">
               {form.windows.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => set("windows", form.windows.filter((_, j) => j !== i))}
-                  aria-label={`Remove window ${i + 1}`}
-                  className="shrink-0 rounded-md p-2 text-gray-400 hover:bg-white hover:text-red-500"
-                >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  </svg>
-                </button>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Slot {i + 1}</p>
+                  <button
+                    type="button"
+                    onClick={() => set("windows", form.windows.filter((_, j) => j !== i))}
+                    aria-label={`Remove slot ${i + 1}`}
+                    className="-m-1 rounded-md p-1 text-gray-400 hover:text-red-500"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
               )}
+              <div className="grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-x-2 gap-y-2">
+                <span className="text-sm text-gray-600">From</span>
+                <TimeSelect
+                  label={`Slot ${i + 1} start`}
+                  value={w.from}
+                  onChange={(v) => setWindow(i, "from", v)}
+                  invalid={!!windowsError}
+                  firstFieldId={i === 0 ? "field-windows" : undefined}
+                />
+                <span className="text-sm text-gray-600">To</span>
+                <TimeSelect label={`Slot ${i + 1} end`} value={w.to} onChange={(v) => setWindow(i, "to", v)} invalid={!!windowsError} />
+              </div>
             </div>
           ))}
           {form.windows.length < LIMITS.maxWindows && (
             <button
               type="button"
-              onClick={() => set("windows", [...form.windows, { from: "17:00", to: "19:00" }])}
+              onClick={() => set("windows", [...form.windows, NEW_SLOT_DEFAULTS[Math.min(form.windows.length - 1, NEW_SLOT_DEFAULTS.length - 1)]])}
               className="w-fit text-sm font-medium text-brand hover:underline"
             >
               + Add hours

@@ -49,7 +49,7 @@ const Check = () => (
 
 export default function ForDoctorsPage() {
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_minmax(0,32rem)] lg:items-start lg:gap-14">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,32rem)] lg:items-start lg:gap-14">
       <div className="flex flex-col gap-7">
         <header className="flex flex-col gap-4">
           <span className="w-fit rounded-full bg-brand-light px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-dark">
