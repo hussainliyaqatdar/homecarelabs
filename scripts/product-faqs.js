@@ -10,7 +10,7 @@
 // silently spam 593 near-duplicate FAQ blocks across the whole catalog.
 
 const SERVICE_AREAS_TEXT = "JP Nagar, Jayanagar, BTM Layout, Banashankari, and Kanakpura Road";
-const LAB_PARTNER_TEXT = "NABL-accredited labs run by Agilus Diagnostics (formerly SRL Diagnostics)";
+const LAB_PARTNER_TEXT = "NABL-accredited labs run by Agilus (SRL) Diagnostics";
 
 // Test codes from the business's CC SPRF price list (Agilus catalog codes,
 // matched 1:1 against data/tests.json's own `code` field - see the session
@@ -56,7 +56,7 @@ function testFaqs(test) {
     },
     {
       q: `Is ${name} tested at an NABL-accredited lab?`,
-      a: `Yes. Every ${name} sample we collect is processed at ${LAB_PARTNER_TEXT}, our official diagnostics partner - the same labs used for walk-in patients.`,
+      a: `Yes. Every ${name} sample we collect is processed at ${LAB_PARTNER_TEXT}, our authorised lab partner - the same labs used for walk-in patients.`,
     },
   ];
 }
@@ -86,7 +86,7 @@ function packageFaqs(pkg) {
     },
     {
       q: `Is the ${name} package tested at NABL-accredited labs?`,
-      a: `Yes. Every test in the ${name} package is processed at ${LAB_PARTNER_TEXT}, our official diagnostics partner.`,
+      a: `Yes. Every test in the ${name} package is processed at ${LAB_PARTNER_TEXT}, our authorised lab partner.`,
     },
   ];
 }

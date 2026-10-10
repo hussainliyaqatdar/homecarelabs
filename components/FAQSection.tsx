@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: "Is a pregnancy blood test at home as reliable as visiting a lab?",
-    a: `Yes. Every sample we collect at home is processed in the same NABL-accredited labs (Agilus Diagnostics, formerly SRL) that walk-in patients use - the only difference is convenience. This applies to routine pregnancy blood tests as well as specialised ones like NIPT.`,
+    a: `Yes. Every sample we collect at home is processed in the same NABL-accredited labs run by Agilus (SRL) Diagnostics that walk-in patients use - the only difference is convenience. This applies to routine pregnancy blood tests as well as specialised ones like NIPT.`,
   },
   {
     q: "What pregnancy tests are recommended in each trimester, and can they be done at home?",
@@ -34,24 +34,24 @@ const FAQS = [
     a: "Pricing varies by test - you can see the exact price for NIPT, Double Marker, Quadruple Marker, and every other pregnancy test on its product page before you book, with no hidden charges and no advance payment.",
   },
   {
-    q: "Are you an authorised home-collection partner of Agilus Diagnostics?",
-    a: "Yes. We provide authorised home sample collection for Agilus Diagnostics (formerly known as SRL Diagnostics), and work in partnership with Fortis Hospitals. Every sample we collect is processed in Agilus' NABL-accredited labs.",
+    q: "Are you an authorised home-collection partner of Agilus (SRL) Diagnostics?",
+    a: `Yes. ${BUSINESS_NAME} is an authorised partner of Agilus (SRL) Diagnostics, providing home sample collection, and works in partnership with Fortis Hospitals. Every sample we collect is processed in Agilus' NABL-accredited labs.`,
   },
   {
     q: "How do I find SRL Diagnostics near me?",
-    a: `You don't need to search for "SRL Diagnostics near me" and travel to a centre - as an authorised SRL Diagnostics (now Agilus Diagnostics) partner, we send a phlebotomist to collect your sample at home, anywhere we cover in Bangalore.`,
+    a: `You don't need to search for "SRL Diagnostics near me" and travel to a centre - as ${BUSINESS_NAME}, an authorised partner of Agilus (SRL) Diagnostics, we send a phlebotomist to collect your sample at home, anywhere we cover in Bangalore.`,
   },
   {
     q: "How do I find Agilus Diagnostics near me for a home visit?",
-    a: "You've found it - we're an authorised Agilus Diagnostics home-collection partner in Bangalore. Just book online and a phlebotomist visits your address; there's no need to locate a physical centre nearby.",
+    a: `You've found it - ${BUSINESS_NAME} is an authorised home-collection partner of Agilus (SRL) Diagnostics in Bangalore. Just book online and a phlebotomist visits your address; there's no need to locate a physical centre nearby.`,
   },
   {
     q: "Do you offer SRL Diagnostics home collection in Bangalore?",
-    a: "Yes. SRL Diagnostics is now known as Agilus Diagnostics, and home collection is exactly what we do - book any test or package here and a trained phlebotomist comes to you, with your sample processed at Agilus' NABL-accredited lab.",
+    a: `Yes. SRL Diagnostics now operates as Agilus (SRL) Diagnostics, and ${BUSINESS_NAME} is an authorised partner that does home collection - book any test or package here and a trained phlebotomist comes to you, with your sample processed at Agilus' NABL-accredited lab.`,
   },
   {
     q: "What's the process for Agilus Diagnostics home collection?",
-    a: "Search for your test or package, add it to your cart, and pick a time slot that works for you. A trained phlebotomist visits your home to collect the sample, which is then processed at Agilus Diagnostics' NABL-accredited lab - with reports typically ready the same day.",
+    a: "Search for your test or package, add it to your cart, and pick a time slot that works for you. A trained phlebotomist visits your home to collect the sample, which is then processed at Agilus (SRL) Diagnostics' NABL-accredited lab - with reports typically ready the same day.",
   },
   {
     q: "Which areas in Bangalore do you cover for home sample collection?",
